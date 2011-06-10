@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<game name='Generic Game'>
+	<decks>
+		<deck source='decks/deck1.xml' />
+		<deck source='decks/deck2.xml' />
+		<deck source='decks/deck3.xml' />
+	</decks>
+</game>

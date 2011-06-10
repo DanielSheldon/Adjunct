@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<deck name='My First Deck'>
+	<card>
+		<title>Another Awesome Card</title>
+		<content>
+			<section title='Name for Section'><![CDATA[
+				Here is a descriptions for this card<br />
+				I think this should be HTML<br />
+				But I'm not really sure
+			]]></section>
+		</content>
+	</card>
+</deck>
