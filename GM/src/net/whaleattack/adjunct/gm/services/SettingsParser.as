@@ -4,9 +4,8 @@ package net.whaleattack.adjunct.gm.services
 
 	public class SettingsParser
 	{
-		public function parseSettings(xml:XML):SettingsVO
+		public function parseSettings(xml:XML, settingsVO:SettingsVO):SettingsVO
 		{
-			var settingsVO:SettingsVO = new SettingsVO();
 			settingsVO.decks = new Array();
 			
 			for each(var deck:XML in xml..deck)

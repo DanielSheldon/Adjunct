@@ -2,6 +2,8 @@ package net.whaleattack.adjunct.gm
 {
 	import flash.display.DisplayObjectContainer;
 	
+	import net.whaleattack.adjunct.gm.controllers.LoadSettingsCommand;
+	import net.whaleattack.adjunct.gm.events.SettingsEvent;
 	import net.whaleattack.adjunct.gm.models.DeckModel;
 	import net.whaleattack.adjunct.gm.services.DeckParser;
 	import net.whaleattack.adjunct.gm.services.DeckService;
@@ -14,9 +16,9 @@ package net.whaleattack.adjunct.gm
 	
 	import org.robotlegs.mvcs.Context;
 	
-	public class GameAssistantContext extends Context
+	public class AdjunctContext extends Context
 	{
-		public function GameAssistantContext(contextView:DisplayObjectContainer=null)
+		public function AdjunctContext(contextView:DisplayObjectContainer=null)
 		{
 			super(contextView);
 		}
@@ -28,6 +30,8 @@ package net.whaleattack.adjunct.gm
 			injector.mapSingleton(SettingsParser);
 			injector.mapSingleton(DeckService);
 			injector.mapSingleton(DeckParser);
+			
+			commandMap.mapEvent(SettingsEvent.LOAD, LoadSettingsCommand);
 			
 			mediatorMap.mapView(Deck, DeckMediator);
 			mediatorMap.mapView(Table, TableMediator);

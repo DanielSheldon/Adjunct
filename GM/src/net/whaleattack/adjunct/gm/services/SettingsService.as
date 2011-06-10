@@ -16,6 +16,7 @@ package net.whaleattack.adjunct.gm.services
 		[Inject]
 		public var parser:SettingsParser;
 		
+		private var _settingsVO:SettingsVO;
 		private var _loader:URLLoader;
 		
 		public function SettingsService()
@@ -25,15 +26,17 @@ package net.whaleattack.adjunct.gm.services
 			_loader = new URLLoader();
 		}
 		
-		public function loadSettings():void
+		public function loadSettings(settingsVO:SettingsVO):void
 		{
+			_settingsVO = settingsVO;
+			
 			addLoaderEvents();
 			_loader.load(new URLRequest("game/settings.xml"));
 		}
 		
 		private function onComplete(event:Event):void
 		{
-			var settings:SettingsVO = parser.parseSettings(XML(event.target.data));
+			var settings:SettingsVO = parser.parseSettings(XML(event.target.data), _settingsVO);
 			
 			dispatch(new SettingsEvent(SettingsEvent.LOADED, settings));
 			

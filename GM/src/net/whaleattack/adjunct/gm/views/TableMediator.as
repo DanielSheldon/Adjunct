@@ -4,6 +4,7 @@ package net.whaleattack.adjunct.gm.views
 	import net.whaleattack.adjunct.gm.events.DeckLoadEvent;
 	import net.whaleattack.adjunct.gm.events.SettingsEvent;
 	import net.whaleattack.adjunct.gm.models.DeckModel;
+	import net.whaleattack.adjunct.gm.models.vo.SettingsVO;
 	import net.whaleattack.adjunct.gm.services.DeckService;
 	import net.whaleattack.adjunct.gm.services.SettingsService;
 	
@@ -30,7 +31,7 @@ package net.whaleattack.adjunct.gm.views
 		
 		override public function onRegister():void
 		{
-			settingsService.loadSettings();
+			eventDispatcher.dispatchEvent(new SettingsEvent(SettingsEvent.LOAD, new SettingsVO("game/settings.xml")));
 			
 			addContextListener(SettingsEvent.LOADED, onSettings);
 		}
