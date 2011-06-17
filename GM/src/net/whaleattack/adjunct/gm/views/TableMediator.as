@@ -31,24 +31,6 @@ package net.whaleattack.adjunct.gm.views
 		
 		override public function onRegister():void
 		{
-			eventDispatcher.dispatchEvent(new SettingsEvent(SettingsEvent.LOAD, new SettingsVO("game/settings.xml")));
-			
-			addContextListener(SettingsEvent.LOADED, onSettings);
-		}
-		
-		private function onSettings(event:SettingsEvent):void
-		{
-			addContextListener(DeckEvent.LOADED, onDeck);
-			
-			for each(var source:String in event.settings.decks)
-			{
-				deckServce.loadDeck(source);
-			}
-		}
-		
-		private function onDeck(event:DeckEvent):void
-		{
-			deckModel.addDeck(event.deck);
 		}
 	}
 }

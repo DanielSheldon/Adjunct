@@ -25,7 +25,7 @@ package net.whaleattack.adjunct.gm.services
 		{
 			var loader:URLLoader = new URLLoader();
 			addLoaderEvents(loader);
-			loader.load(new URLRequest("game/" + source));
+			loader.load(new URLRequest(source));
 		}
 		
 		private function onComplete(event:Event):void
@@ -38,6 +38,7 @@ package net.whaleattack.adjunct.gm.services
 		
 		private function onError(event:IOErrorEvent):void
 		{
+			dispatch(new DeckEvent(DeckEvent.ERROR, null));
 			removeLoaderEvents(URLLoader(event.target))
 		}
 		

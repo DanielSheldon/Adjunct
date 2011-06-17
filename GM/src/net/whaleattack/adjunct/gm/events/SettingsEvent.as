@@ -9,21 +9,21 @@ package net.whaleattack.adjunct.gm.events
 		public static const LOADED:String = "SettingsEvent.loaded";
 		public static const LOAD:String = "SettingsEvent.load";
 		
-		private var _settings:SettingsVO;
-		public function get settings():SettingsVO
+		private var _source:String;
+		public function get source():String
 		{
-			return _settings;
+			return _source;
 		}
 		
-		public function SettingsEvent(type:String, settings:SettingsVO, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function SettingsEvent(type:String, source:String=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
-			_settings = settings;
+			_source = source;
 		}
 		
 		override public function clone():Event
 		{
-			return new SettingsEvent(type, settings, bubbles, cancelable);
+			return new SettingsEvent(type, source, bubbles, cancelable);
 		}
 	}
 }

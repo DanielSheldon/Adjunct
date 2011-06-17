@@ -7,6 +7,7 @@ package net.whaleattack.adjunct.gm.services
 	import flash.net.URLRequest;
 	
 	import net.whaleattack.adjunct.gm.events.SettingsEvent;
+	import net.whaleattack.adjunct.gm.models.SettingsModel;
 	import net.whaleattack.adjunct.gm.models.vo.SettingsVO;
 	
 	import org.robotlegs.mvcs.Actor;
@@ -16,7 +17,10 @@ package net.whaleattack.adjunct.gm.services
 		[Inject]
 		public var parser:SettingsParser;
 		
-		private var _settingsVO:SettingsVO;
+		[Inject]
+		public var model:SettingsModel;
+		
+		private var _source:String;
 		private var _loader:URLLoader;
 		
 		public function SettingsService()
@@ -26,19 +30,23 @@ package net.whaleattack.adjunct.gm.services
 			_loader = new URLLoader();
 		}
 		
-		public function loadSettings(settingsVO:SettingsVO):void
-		{
-			_settingsVO = settingsVO;
-			
+		public function loadSettings(source:String):void
+		{			
 			addLoaderEvents();
-			_loader.load(new URLRequest("game/settings.xml"));
+			_source = source;			
+			
+			_loader.load(new URLRequest(source));
 		}
 		
 		private function onComplete(event:Event):void
 		{
-			var settings:SettingsVO = parser.parseSettings(XML(event.target.data), _settingsVO);
+			var settings:SettingsVO = parser.parseSettings(XML(event.target.data));
+			settings.source = _source;
+			settings.sourceDirectory = _source.substr(0,_source.lastIndexOf("/") + 1);
 			
-			dispatch(new SettingsEvent(SettingsEvent.LOADED, settings));
+			model.settingsVO = settings;
+			
+			dispatch(new SettingsEvent(SettingsEvent.LOADED));
 			
 			removeLoaderEvents();
 		}

@@ -7,6 +7,7 @@ package net.whaleattack.adjunct.gm.events
 	public class DeckEvent extends Event
 	{
 		public static const LOADED:String = "DeckEvent.loaded";
+		public static const ERROR:String = "DeckEvent.error";
 		
 		private var _deck:DeckVO;
 		public function get deck():DeckVO

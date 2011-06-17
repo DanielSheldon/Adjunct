@@ -15,7 +15,7 @@ package net.whaleattack.adjunct.gm.controllers
 		
 		override public function execute():void
 		{
-			service.loadSettings(event.settings);
+			service.loadSettings(event.source);
 		}
 	}
 }
